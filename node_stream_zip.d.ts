@@ -3,6 +3,12 @@
 declare namespace StreamZip {
     interface StreamZipOptions {
         /**
+         * encoding used to encode fileName from buffer
+         * @default gbk
+         */
+        encoding?: string
+
+        /**
          * File to read
          * @default undefined
          */

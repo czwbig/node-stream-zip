@@ -1,3 +1,28 @@
+# fork reason
+
+我现在的工作会涉及到一些 gbk 编码文件名的压缩包，原版 node-stream-zip 并没有提供相关的 encoding 选项  
+所以在此之上我增加了 encoding 选项，并且默认值为 'utf8'，可以通过初始化参数指定 'encoding' (支持的编码请参考 https://www.npmjs.com/package/iconv-lite )
+
+> My major work need to resolve some compressed packages of gbk-encoded file names. The original node-stream-zip did not provide the relevant encoding options, so I added the encoding option, and the default encoding is 'utf8', which can be initialized by parameter Specify 'encoding' (Please refer to https://www.npmjs.com/package/iconv-lite for supported encodings)
+
+
+```javascript
+const StreamZip = require('node-stream-zip');
+const zip = new StreamZip({
+    file: 'archive.zip',
+    storeEntries: true,
+    encoding: 'gbk' // default utf8.
+});
+
+// Handle errors
+zip.on('error', err => { /*...*/ });
+```
+# Unit test
+
+原版的单元测试是失效的，有几个用例无法通过，因为个人精力有限，并没有维护单元测试的打算
+
+> The original unit tests were invalid and several use cases failed. I had no intention of maintaining the unit tests due to my limited energy.
+
 # node-stream-zip ![CI Checks](https://github.com/antelle/node-stream-zip/workflows/CI%20Checks/badge.svg)
 
 node.js library for reading and extraction of ZIP archives.  

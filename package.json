@@ -1,18 +1,22 @@
 {
-  "name": "node-stream-zip",
+  "name": "node-stream-zip-iconv",
   "version": "1.12.0",
-  "description": "node.js library for reading and extraction of ZIP archives",
+  "description": "在 node-stream-zip 基础上增加可指定文件名编码.Specify file name encoding(default utf8). Fork from node-stream-zip(node.js library for reading and extraction of ZIP archives)",
   "keywords": [
     "zip",
     "archive",
     "unzip",
-    "stream"
+    "stream",
+    "gbk",
+    "encoding",
+    "iconv",
+    "convmv"
   ],
-  "homepage": "https://github.com/antelle/node-stream-zip",
-  "author": "Antelle <antelle.net@gmail.com> (https://github.com/antelle)",
+  "homepage": "https://github.com/czwbig/node-stream-zip",
+  "author": "zhiwu.cao <czwbig@qq.com> (https://github.com/czwbig)",
   "bugs": {
-    "email": "antelle.net@gmail.com",
-    "url": "https://github.com/antelle/node-stream-zip/issues"
+    "email": "czwbig@qq.com",
+    "url": "https://github.com/czwbig/node-stream-zip/issues"
   },
   "license": "MIT",
   "files": [
@@ -27,13 +31,16 @@
   "types": "node_stream_zip.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antelle/node-stream-zip.git"
+    "url": "https://github.com/czwbig/node-stream-zip.git"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.5.0 <5.0.0 || >=5.10.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",
     "nodeunit": "^0.11.3"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.6.2"
   }
 }

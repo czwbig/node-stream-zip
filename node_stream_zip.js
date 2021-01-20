@@ -11,7 +11,8 @@ var
     path = require('path'),
     events = require('events'),
     zlib = require('zlib'),
-    stream = require('stream');
+    stream = require('stream'),
+    iconv = require('iconv-lite');
 
 // endregion
 
@@ -159,6 +160,7 @@ var StreamZip = function(config) {
 
         entries = config.storeEntries !== false ? {} : null,
         fileName = config.file;
+        encoding = config.encoding || 'utf8'
 
     open();
 
@@ -345,7 +347,7 @@ var StreamZip = function(config) {
                     op.move = true;
                     return;
                 }
-                entry.read(buffer, bufferPos);
+                entry.read(buffer, bufferPos, encoding);
                 if (!config.skipEntryNameValidation) {
                     entry.validateName();
                 }
@@ -775,8 +777,8 @@ ZipEntry.prototype.readDataHeader = function(data) {
     this.extraLen = data.readUInt16LE(consts.LOCEXT);
 };
 
-ZipEntry.prototype.read = function(data, offset) {
-    this.name = data.slice(offset, offset += this.fnameLen).toString();
+ZipEntry.prototype.read = function(data, offset, encoding) {
+    this.name = iconv.decode(data.slice(offset, offset += this.fnameLen), encoding)
     var lastChar = data[offset - 1];
     this.isDirectory = (lastChar == 47) || (lastChar == 92);
 
